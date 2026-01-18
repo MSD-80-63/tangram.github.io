@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tangram - Sosyal Medyanı Kendin Tasarla</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- GENEL AYARLAR (Aynı) --- */
+        :root {
+            --primary-color: #6C63FF;
+            --secondary-color: #00D2FC;
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --text-light: #f8fafc;
+            --text-gray: #94a3b8;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        /* --- NAVBAR (Güncellendi: Logo İkonu Eklendi) --- */
+        header {
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            background-color: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        nav { display: flex; justify-content: space-between; align-items: center; }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+        }
+        /* Basit bir Tangram ikonu (SVG) */
+        .logo svg { margin-right: 10px; fill: url(#grad1); }
+        .logo span { color: var(--primary-color); }
+
+        .nav-links a { margin-left: 30px; font-size: 14px; color: var(--text-gray); transition: 0.3s; }
+        .nav-links a:hover { color: var(--primary-color); }
+        .btn-download {
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            padding: 10px 25px;
+            border-radius: 50px;
+            color: white;
+            font-weight: 600;
+            margin-left: 20px;
+        }
+
+        /* --- HERO BÖLÜMÜ (Güncellendi: Görsel Eklendi) --- */
+        .hero {
+            min-height: 100vh; /* mobilde taşmayı önlemek için min-height */
+            display: flex;
+            align-items: center;
+            padding-top: 100px;
+            padding-bottom: 50px;
+        }
+        .hero-content { flex: 1; padding-right: 50px; }
+        .hero h1 { font-size: 48px; line-height: 1.2; margin-bottom: 20px; }
+        .hero h1 span {
+            background: -webkit-linear-gradient(left, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero p { color: var(--text-gray); font-size: 18px; margin-bottom: 30px; max-width: 500px; }
+        .hero-image { flex: 1; display: flex; justify-content: center; position: relative; }
+
+        /* Telefon Mockup Alanı (Güncellendi: Resim sığdırma) */
+        .phone-mockup {
+            width: 300px;
+            height: 600px;
+            background: var(--bg-card);
+            border: 8px solid #334155;
+            border-radius: 40px;
+            box-shadow: 0 20px 50px rgba(108, 99, 255, 0.2);
+            overflow: hidden; /* Resmin taşmasını engelle */
+            position: relative;
+        }
+        
+        /* İçerideki geçici görsel için stil */
+        .phone-mockup img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Resmi bozmadan kutuya sığdır */
+            opacity: 0.8; /* Biraz karanlık yaparak sitenin temasına uydurma */
+        }
+
+        /* --- ÖZELLİKLER (Aynı) --- */
+        .features { padding: 100px 0; }
+        .section-title { text-align: center; margin-bottom: 60px; }
+        .section-title h2 { font-size: 36px; margin-bottom: 10px; }
+        .section-title p { color: var(--text-gray); }
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .feature-card {
+            background: var(--bg-card); padding: 30px; border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.05); transition: 0.3s;
+        }
+        .feature-card:hover { transform: translateY(-10px); border-color: var(--primary-color); }
+        .icon-box {
+            width: 50px; height: 50px; background: rgba(108, 99, 255, 0.1); border-radius: 12px;
+            display: flex; align-items: center; justify-content: center; color: var(--primary-color);
+            font-size: 24px; margin-bottom: 20px;
+        }
+        .feature-card h3 { margin-bottom: 10px; font-size: 20px; }
+        .feature-card p { color: var(--text-gray); font-size: 14px; }
+
+        /* --- FOOTER (Aynı) --- */
+        footer { text-align: center; padding: 40px; border-top: 1px solid rgba(255,255,255,0.05); color: var(--text-gray); font-size: 14px; }
+
+        /* --- MOBİL UYUM (Aynı) --- */
+        @media (max-width: 768px) {
+            .hero { flex-direction: column; height: auto; padding-top: 120px; text-align: center; }
+            .hero-content { padding-right: 0; margin-bottom: 50px; }
+            .hero p { margin: 0 auto 30px auto; }
+            .nav-links { display: none; }
+            .phone-mockup { height: 500px; width: 250px; } /* Mobilde telefonu biraz küçült */
+        }
+    </style>
+</head>
+<body>
+    <svg width="0" height="0">
+        <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style="stop-color:#6C63FF;stop-opacity:1" />
+          <stop offset="100%" style="stop-color:#00D2FC;stop-opacity:1" />
+        </linearGradient>
+      </svg>
+
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 0l-12 12h12v12l12-12h-12v-12z"/></svg>
+                    TANGRAM<span>.</span>
+                </div>
+                <div class="nav-links">
+                    <a href="#">Ana Sayfa</a>
+                    <a href="#features">Eklentiler</a>
+                    <a href="#">Hakkımızda</a>
+                    <a href="#" class="btn-download">Uygulamayı İndir</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container" style="display: flex; align-items: center; width: 100%; flex-wrap: wrap; justify-content: center;">
+            <div class="hero-content">
+                <h1>Sosyal Medyanı <br> <span>Parçalarla Tamamla.</span></h1>
+                <p>Tangram, standart bir sosyal medya uygulaması değil. İhtiyacın olan eklentileri seç, profilini bir yapboz gibi kendin tasarla.</p>
+                <a href="#" class="btn-download" style="margin-left:0;">Hemen Keşfet</a>
+            </div>
+            <div class="hero-image">
+                <div class="phone-mockup">
+                    <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Tangram Uygulama Ekranı">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Neden Tangram?</h2>
+                <p>Sadece ihtiyacın olan özellikleri kullan.</p>
+            </div>
+
+            <div class="grid-container">
+                <div class="feature-card">
+                    <div class="icon-box">🧩</div>
+                    <h3>Modüler Yapı</h3>
+                    <p>Haber akışı, mesajlaşma veya oyun modülü. Hangisini istersen onu ekle, istemediğini çıkar.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon-box">🎨</div>
+                    <h3>Sınırsız Özelleştirme</h3>
+                    <p>Standart temalara sıkışıp kalma. Tangram ile arayüz renklerini ve yerleşimini sen belirlersin.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon-box">🚀</div>
+                    <h3>Ekstra Eklentiler</h3>
+                    <p>Sıradan uygulamalarda bulamayacağın özel araçlar ve gizli özellikler Tangram markette.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Tangram App. Tüm hakları saklıdır.</p>
+    </footer>
+
+</body>
+</html>
